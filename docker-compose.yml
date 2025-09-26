@@ -1,0 +1,40 @@
+services:
+  # FastAPI Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fastapi_backend
+    ports:
+      - "80:8000"  # Map container port 8000 to public port 80
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    environment:
+      - DATA_PATH=/app/data
+    restart: always
+    networks:
+      - app-network
+    extra_hosts:
+      - "model-runner.docker.internal:host-gateway"
+
+# AI Models Configuration
+models:
+  sql_model:
+    model: hf.co/unsloth/gemma-3-270m-it-gguf
+    context_size: 4096
+    runtime_flags:
+      - "--temp"
+      - "0.1"
+      - "--top-k"
+      - "1"
+      - "--threads"
+      - "4"
+
+# volumes:
+  # mysql_data: # Removed since we're using AWS RDS
+
+networks:
+  app-network:
+    driver: bridge
