@@ -471,10 +471,7 @@ sudo usermod -aG docker ubuntu
 - [ ] (Optional) Frontend deployed
 
 ---
-
-## 🎯 **Final Testing**
-
-Once deployed, test these URLs (replace with your IP/domain):
+URLs (replace with your IP/domain):
 
 1. **Health Check**: `http://YOUR_EC2_IP:8000/health`
 2. **API Docs**: `http://YOUR_EC2_IP:8000/docs`
