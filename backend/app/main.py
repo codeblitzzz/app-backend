@@ -5,7 +5,7 @@ import uvicorn
 from .config.settings import settings
 from .config.database import test_db_connection
 from .config.logging import setup_logging, get_logger
-from .routes import health, query, providers, analytics, export
+from .routes import health, query, providers, analytics
 
 # Configure logging
 setup_logging()
@@ -32,7 +32,6 @@ app.include_router(health.router)
 app.include_router(query.router)
 app.include_router(providers.router)
 app.include_router(analytics.router)
-app.include_router(export.router)
 
 # Legacy routes for backward compatibility
 from .routes.providers import get_duplicates, process_csv
